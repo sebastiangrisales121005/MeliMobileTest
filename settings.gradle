@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MeliMobileTest"
 include ':app'
+include ':domain'
+include ':dataAccess'
