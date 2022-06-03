@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
       CoroutineScope(Dispatchers.Main).launch {
           withContext(Dispatchers.IO) {
-              Log.e("PRODUCTS", productUseCase.getProducts().toString())
+               productUseCase.getProducts()
           }
       }
     }

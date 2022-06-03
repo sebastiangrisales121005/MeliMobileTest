@@ -13,7 +13,7 @@ object ProductTranslator {
         ProductBuilder().apply {
 
         setTitle(productResponse.title)
-        setPrice(productResponse.price)
+        setPrice(productResponse.price.toInt())
         setImageProduct(productResponse.imageProduct)
         setAddress(fromAddressApiToAddress(productResponse.address))
         setSpecs(fromSpecsApiToSpecs(productResponse.specs))

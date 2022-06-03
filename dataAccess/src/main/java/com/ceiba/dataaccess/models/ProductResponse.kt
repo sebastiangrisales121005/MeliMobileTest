@@ -10,7 +10,7 @@ data class ProductResponse(
     @SerializedName("title")
     var title: String,
     @SerializedName("price")
-    var price: Int,
+    var price: Double,
     @SerializedName("thumbnail")
     var imageProduct: String,
     @SerializedName("address")
