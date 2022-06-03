@@ -1,7 +1,8 @@
-package com.ceiba.melimobiletest
+package com.ceiba.melimobiletest.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ceiba.melimobiletest.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
