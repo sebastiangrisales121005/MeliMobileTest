@@ -1,6 +1,6 @@
 package com.ceiba.domain
 
-import com.ceiba.domain.core.ProductBuilder
+import com.ceiba.domain.core.ProductBuilderTest
 import com.ceiba.domain.exception.ProductException
 import com.ceiba.domain.models.Product
 import org.junit.Assert
@@ -10,7 +10,7 @@ class ProductTest {
     @Test
     fun product_validateDataEmpty_isFailure() {
         //Arrange
-        val productBuilder = ProductBuilder.aProduct()
+        val productBuilder = ProductBuilderTest.aProduct()
             .withTitle("")
             .withImageProduct("")
 
