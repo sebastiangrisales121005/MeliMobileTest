@@ -10,11 +10,13 @@ class ProductRepositoryImpl @Inject constructor(): ProductRepository {
     private val apiService = ApiInstance.createApi()
 
     override suspend fun getProducts(): List<Product> {
-        val productsResponse = apiService.getProducts("").listProducts
+        val productsResponse = apiService.getProducts("Motorola").execute().body()?.listProducts
         val listProducts = ArrayList<Product>()
 
-        for (i in productsResponse.indices) {
-            listProducts.add(ProductTranslator.fromApiToDomain(productsResponse[i]).build())
+        productsResponse?.let {
+            for (i in productsResponse.indices) {
+                listProducts.add(ProductTranslator.fromApiToDomain(productsResponse[i]).build())
+            }
         }
 
         return listProducts
