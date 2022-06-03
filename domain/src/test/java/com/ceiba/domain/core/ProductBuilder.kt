@@ -1,11 +1,15 @@
 package com.ceiba.domain.core
 
+import com.ceiba.domain.models.Address
 import com.ceiba.domain.models.Product
+import com.ceiba.domain.models.Specs
 
 class ProductBuilderTest {
     var title: String
     var price: Int = 0
     var imageProduct: String
+    var address: Address
+    var specs: List<Specs>
 
     companion object {
         fun aProduct(): ProductBuilderTest {
@@ -17,6 +21,8 @@ class ProductBuilderTest {
         this.title = "Celular Motorola"
         this.price = 1200
         this.imageProduct = "http://mla-s2-p.mlstatic.com/795558-MLA31003306206_062019-I.jpg"
+        this.address = Address("Risaralda", "Pereira")
+        this.specs = mutableListOf(Specs("CPU", "Snapdragon"))
     }
 
     fun withTitle(title: String): ProductBuilderTest {
@@ -34,7 +40,17 @@ class ProductBuilderTest {
         return this
     }
 
+    fun withAddress(address: Address): ProductBuilderTest {
+        this.address = address
+        return this
+    }
+
+    fun withSpecs(specs: List<Specs>): ProductBuilderTest {
+        this.specs = specs
+        return this
+    }
+
     fun build(): Product {
-        return Product(title, price, imageProduct)
+        return Product(title, price, imageProduct, address, specs)
     }
 }
