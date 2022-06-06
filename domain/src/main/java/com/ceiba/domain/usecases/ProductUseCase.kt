@@ -5,5 +5,5 @@ import com.ceiba.domain.repository.ProductRepository
 import javax.inject.Inject
 
 class ProductUseCase @Inject constructor(private val productRepository: ProductRepository) {
-    suspend fun getProducts(): List<Product> = productRepository.getProducts()
+    suspend fun getProducts(filterSearch: String): List<Product> = productRepository.getProducts(filterSearch)
 }

@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             adapter = mMainAdapter
         }
 
-        mMainViewModel?.showProducts()
+        mMainViewModel?.showProducts("Motorola")
     }
 
     @SuppressLint("NotifyDataSetChanged")

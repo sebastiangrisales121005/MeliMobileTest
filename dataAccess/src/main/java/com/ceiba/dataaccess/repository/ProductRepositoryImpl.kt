@@ -9,8 +9,8 @@ import javax.inject.Inject
 class ProductRepositoryImpl @Inject constructor(): ProductRepository {
     private val apiService = ApiInstance.createApi()
 
-    override suspend fun getProducts(): List<Product> {
-        val productsResponse = apiService.getProducts("Motorola").execute().body()?.listProducts
+    override suspend fun getProducts(filterSearch: String): List<Product> {
+        val productsResponse = apiService.getProducts(filterSearch).execute().body()?.listProducts
         val listProducts = ArrayList<Product>()
 
         productsResponse?.let {

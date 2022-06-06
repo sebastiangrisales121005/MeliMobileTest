@@ -16,10 +16,10 @@ class MainViewModel @Inject constructor(private val productUseCase: ProductUseCa
 
     val showListProducts = MutableLiveData<List<Product>>()
 
-    fun showProducts() {
+    fun showProducts(filterSearch: String) {
         viewModelScope.launch {
             withContext(Dispatchers.Main) {
-                showListProducts.value = productUseCase.getProducts()
+                showListProducts.value = productUseCase.getProducts(filterSearch)
             }
         }
     }
