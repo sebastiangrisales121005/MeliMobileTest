@@ -1,5 +1,6 @@
 package com.ceiba.melimobiletest.main
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(mActivityMainBinding.root)
 
         initializeWidgets()
+        observables()
 
     }
 
@@ -44,6 +46,17 @@ class MainActivity : AppCompatActivity() {
         with(mActivityMainBinding.listProducts) {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = mMainAdapter
+        }
+
+        mMainViewModel?.showProducts()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun observables() {
+        mMainViewModel?.showListProducts?.observe(this) {
+            listArrayOfProducts.clear()
+            listArrayOfProducts.addAll(it)
+            mMainAdapter.notifyDataSetChanged()
         }
     }
 }
