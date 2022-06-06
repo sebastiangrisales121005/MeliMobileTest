@@ -27,9 +27,8 @@ class MainAdapter(private val context: Context, private val listProducts: List<P
 
     }
 
-    override fun getItemCount(): Int {
-        return listProducts.size
-    }
+    override fun getItemCount(): Int = listProducts.size
+
 
     override fun onClick(view: View?) {
         mListenerProduct?.onClick(view)
