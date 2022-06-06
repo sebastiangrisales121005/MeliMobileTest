@@ -40,8 +40,9 @@ class MainAdapter(private val context: Context, private val listProducts: List<P
     class ViewHolder(private val itemProductBinding: ItemProductBinding):
         RecyclerView.ViewHolder(itemProductBinding.root) {
             fun addItemProduct(product: Product) {
+                val price = PESO_SIGN + product.price.toString()
                 itemProductBinding.titleProduct.text = product.title
-                itemProductBinding.priceProduct.text = product.price.toString()
+                itemProductBinding.priceProduct.text = price
                 Picasso.get().load(product.imageProduct).into(itemProductBinding.imageProduct)
             }
 
@@ -51,6 +52,10 @@ class MainAdapter(private val context: Context, private val listProducts: List<P
             }
         }
 
+    }
+
+    companion object {
+        const val PESO_SIGN = "$"
     }
 
 }
