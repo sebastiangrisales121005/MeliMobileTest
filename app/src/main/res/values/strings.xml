@@ -3,4 +3,6 @@
     <string name="buscar_producto">Buscar producto...</string>
     <string name="detalle">DETALLE</string>
     <string name="sin_resultados">Sin resultados</string>
+    <string name="ubicacion">Ubicación:</string>
+    <string name="caracteristicas">Características:</string>
 </resources>
