@@ -1,6 +1,7 @@
 package com.ceiba.melimobiletest.main
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -14,6 +15,7 @@ import com.ceiba.domain.usecases.ProductUseCase
 import com.ceiba.melimobiletest.R
 import com.ceiba.melimobiletest.adapter.MainAdapter
 import com.ceiba.melimobiletest.databinding.ActivityMainBinding
+import com.ceiba.melimobiletest.detailproduct.view.DetailProductActivity
 import com.ceiba.melimobiletest.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -27,6 +29,10 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mMainAdapter: MainAdapter
     private val listArrayOfProducts = ArrayList<Product>()
+
+    companion object {
+        const val PRODUCT_KEY = "PRODUCT"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         mMainViewModel?.showProducts("Motorola")
         searchProducts()
+        onClickDetailProduct()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -61,6 +68,15 @@ class MainActivity : AppCompatActivity() {
             listArrayOfProducts.clear()
             listArrayOfProducts.addAll(it)
             mMainAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun onClickDetailProduct() {
+        mMainAdapter.setProductOnClickListener {
+            val product = listArrayOfProducts[mActivityMainBinding.listProducts.getChildAdapterPosition(it)]
+            startActivity(Intent(this, DetailProductActivity::class.java)
+                .putExtra(PRODUCT_KEY, product))
+
         }
     }
 
