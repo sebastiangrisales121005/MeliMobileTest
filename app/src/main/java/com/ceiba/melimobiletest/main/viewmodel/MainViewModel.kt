@@ -19,9 +19,13 @@ class MainViewModel @Inject constructor(private val productUseCase: ProductUseCa
     fun showProducts(filterSearch: String) {
         viewModelScope.launch {
             withContext(Dispatchers.Main) {
-                showListProducts.value = productUseCase.getProducts(filterSearch)
+                showListProducts.value = getProducts(filterSearch)
             }
         }
     }
+
+    private suspend fun getProducts(filterSearch: String): List<Product> =
+        withContext(Dispatchers.IO) { productUseCase.getProducts(filterSearch) }
+
 
 }
