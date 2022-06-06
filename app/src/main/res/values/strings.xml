@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MeliMobileTest</string>
     <string name="buscar_producto">Buscar producto...</string>
+    <string name="detalle">DETALLE</string>
 </resources>
