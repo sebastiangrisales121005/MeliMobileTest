@@ -10,94 +10,106 @@
             type="com.ceiba.melimobiletest.detailproduct.viewmodel.DetailProductViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image_product"
-            android:layout_width="80dp"
-            android:layout_height="120dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ejemplo"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/title_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/image_product"
-            app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="30dp"
-            android:textSize="22sp"
-            android:text="Motorola"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/price_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/image_product"
-            app:layout_constraintTop_toBottomOf="@id/title_product"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="30dp"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:text="2350"/>
+                <ImageView
+                    android:id="@+id/image_product"
+                    android:layout_width="80dp"
+                    android:layout_height="120dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ejemplo"/>
 
-        <TextView
-            android:id="@+id/title_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/price_product"
-            app:layout_constraintStart_toStartOf="@id/image_product"
-            android:layout_marginTop="50dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:text="@string/ubicacion"/>
+                <TextView
+                    android:id="@+id/title_product"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="30dp"
+                    android:textSize="22sp"
+                    android:text="Moto G60s 128 Gb Aqua 6"/>
 
-        <ImageView
-            android:id="@+id/icon_location"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:layout_constraintTop_toBottomOf="@id/title_location"
-            app:layout_constraintStart_toStartOf="@id/title_location"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/location"/>
+                <TextView
+                    android:id="@+id/price_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/image_product"
+                    app:layout_constraintTop_toBottomOf="@id/title_product"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="30dp"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/city_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/title_location"
-            app:layout_constraintStart_toEndOf="@id/icon_location"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:textSize="18sp"
-            android:text="Risaralda - Pereira"/>
+                <TextView
+                    android:id="@+id/title_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/price_product"
+                    app:layout_constraintStart_toStartOf="@id/image_product"
+                    android:layout_marginTop="50dp"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:text="@string/ubicacion"/>
 
-        <TextView
-            android:id="@+id/spec_title_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/title_location"
-            app:layout_constraintTop_toBottomOf="@id/city_product"
-            android:layout_marginTop="50dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:text="@string/caracteristicas"/>
+                <ImageView
+                    android:id="@+id/icon_location"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/title_location"
+                    app:layout_constraintStart_toStartOf="@id/title_location"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/location"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listSpecs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/spec_title_product"/>
+                <TextView
+                    android:id="@+id/city_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/title_location"
+                    app:layout_constraintStart_toEndOf="@id/icon_location"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/spec_title_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/title_location"
+                    app:layout_constraintTop_toBottomOf="@id/city_product"
+                    android:layout_marginTop="50dp"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:text="@string/caracteristicas"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listSpecs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/spec_title_product"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    </ScrollView>
 
 </layout>
