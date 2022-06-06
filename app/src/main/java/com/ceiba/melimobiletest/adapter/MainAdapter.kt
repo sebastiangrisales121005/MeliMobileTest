@@ -1,6 +1,7 @@
 package com.ceiba.melimobiletest.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,20 +11,30 @@ import com.squareup.picasso.Picasso
 
 class MainAdapter(private val context: Context, private val listProducts: List<Product>):
     RecyclerView.Adapter<MainAdapter.ViewHolder>(), View.OnClickListener {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAdapter.ViewHolder {
-        TODO("Not yet implemented")
+    var mListenerProduct: View.OnClickListener? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = ItemProductBinding.inflate(LayoutInflater.from(context), parent, false)
+        view.root.setOnClickListener(this)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MainAdapter.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.addItemProduct(listProducts[position])
+        mListenerProduct?.let { holder.onClickListener(it) }
+
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return listProducts.size
     }
 
-    override fun onClick(p0: View?) {
-        TODO("Not yet implemented")
+    override fun onClick(view: View?) {
+        mListenerProduct?.onClick(view)
+    }
+
+    fun setProductOnClickListener(listener: View.OnClickListener) {
+        mListenerProduct = listener
     }
 
     class ViewHolder(private val itemProductBinding: ItemProductBinding):
