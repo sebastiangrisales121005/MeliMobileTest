@@ -1,6 +1,7 @@
 package com.ceiba.melimobiletest.detailproduct.view
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ceiba.domain.models.Product
@@ -31,9 +32,22 @@ class DetailProductActivity : AppCompatActivity() {
                 adapter = mDetailProductAdapter
             }
 
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowHomeEnabled(true)
+
             showDataDetailProduct(product)
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showDataDetailProduct(product: Product) {
