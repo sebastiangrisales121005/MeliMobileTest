@@ -5,7 +5,7 @@
     <data>
         <variable
             name="model"
-            type="" />
+            type="com.ceiba.melimobiletest.detailproduct.viewmodel.DetailProductViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,8 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
-            android:textSize="18sp"
-            android:text="CPU:"/>
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/value_spec_product"
@@ -34,8 +33,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="Snapdragon"/>
+            android:textStyle="bold" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
