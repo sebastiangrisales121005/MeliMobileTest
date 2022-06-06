@@ -6,7 +6,7 @@ import com.ceiba.domain.models.Address
 import com.ceiba.domain.models.Product
 import com.ceiba.domain.repository.ProductRepository
 import com.ceiba.domain.usecases.ProductUseCase
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
 import org.mockito.Mockito
@@ -46,7 +46,7 @@ class ProductTest {
     }
 
     @Test
-    fun product_getAllProducts_isSuccess() = runTest {
+    fun product_getAllProducts_isSuccess() = runBlocking {
         //Arrange
         val productBuilder = ProductBuilderTest.aProduct()
             .build()
