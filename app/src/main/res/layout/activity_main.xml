@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="" />
+            type="com.ceiba.melimobiletest.main.viewmodel.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
