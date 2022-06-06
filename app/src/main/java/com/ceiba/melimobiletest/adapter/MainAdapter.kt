@@ -41,6 +41,7 @@ class MainAdapter(private val context: Context, private val listProducts: List<P
         RecyclerView.ViewHolder(itemProductBinding.root) {
             fun addItemProduct(product: Product) {
                 itemProductBinding.titleProduct.text = product.title
+                itemProductBinding.priceProduct.text = product.price.toString()
                 Picasso.get().load(product.imageProduct).into(itemProductBinding.imageProduct)
             }
 
