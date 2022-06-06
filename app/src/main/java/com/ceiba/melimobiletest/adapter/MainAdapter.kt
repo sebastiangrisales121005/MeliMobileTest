@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ceiba.domain.models.Product
 import com.ceiba.melimobiletest.databinding.ItemProductBinding
 import com.squareup.picasso.Picasso
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainAdapter(private val context: Context, private val listProducts: List<Product>):
     RecyclerView.Adapter<MainAdapter.ViewHolder>(), View.OnClickListener {
@@ -35,6 +37,23 @@ class MainAdapter(private val context: Context, private val listProducts: List<P
 
     fun setProductOnClickListener(listener: View.OnClickListener) {
         mListenerProduct = listener
+    }
+
+    fun filter(textForTheFilter: String): List<Product> {
+        val filteredList = ArrayList<Product>()
+        if (textForTheFilter.isEmpty()) {
+            filteredList.addAll(listProducts)
+        } else {
+            val filterPattern = textForTheFilter.lowercase(Locale.getDefault())
+            for (product in listProducts) {
+                val validateText = product.title.lowercase(Locale.getDefault())
+                if (validateText.contains(filterPattern)) {
+                    filteredList.add(product)
+                }
+
+            }
+        }
+        return filteredList
     }
 
     class ViewHolder(private val itemProductBinding: ItemProductBinding):

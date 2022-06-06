@@ -3,6 +3,8 @@ package com.ceiba.melimobiletest.main
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -58,5 +60,20 @@ class MainActivity : AppCompatActivity() {
             listArrayOfProducts.addAll(it)
             mMainAdapter.notifyDataSetChanged()
         }
+    }
+
+    fun searchProducts() {
+        mActivityMainBinding.searchUsers.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+        })
     }
 }
