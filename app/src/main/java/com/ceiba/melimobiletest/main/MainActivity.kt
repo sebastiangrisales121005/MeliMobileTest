@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ceiba.domain.models.Product
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         mMainViewModel?.showProducts("Motorola")
+        searchProducts()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -62,13 +64,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun searchProducts() {
+    private fun searchProducts() {
         mActivityMainBinding.searchUsers.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
+                p0?.let {
+                    if (it.isNotEmpty()) {
+                        mMainViewModel?.showProducts(it.toString())
+                    }
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {

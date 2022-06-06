@@ -39,23 +39,6 @@ class MainAdapter(private val context: Context, private val listProducts: List<P
         mListenerProduct = listener
     }
 
-    fun filter(textForTheFilter: String): List<Product> {
-        val filteredList = ArrayList<Product>()
-        if (textForTheFilter.isEmpty()) {
-            filteredList.addAll(listProducts)
-        } else {
-            val filterPattern = textForTheFilter.lowercase(Locale.getDefault())
-            for (product in listProducts) {
-                val validateText = product.title.lowercase(Locale.getDefault())
-                if (validateText.contains(filterPattern)) {
-                    filteredList.add(product)
-                }
-
-            }
-        }
-        return filteredList
-    }
-
     class ViewHolder(private val itemProductBinding: ItemProductBinding):
         RecyclerView.ViewHolder(itemProductBinding.root) {
             fun addItemProduct(product: Product) {
