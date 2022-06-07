@@ -33,7 +33,7 @@
             android:layout_marginTop="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_users"
+                android:id="@+id/search_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/buscar_producto">

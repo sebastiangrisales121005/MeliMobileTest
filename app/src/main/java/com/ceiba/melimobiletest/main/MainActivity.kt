@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun searchProducts() {
-        mActivityMainBinding.searchUsers.addTextChangedListener(object : TextWatcher{
+        mActivityMainBinding.searchProducts.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 

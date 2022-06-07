@@ -2,6 +2,7 @@ package com.ceiba.melimobiletest.main
 
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -32,14 +33,19 @@ class MainActivityTest {
     }
 
     @Test
-    fun validateShowLoading_isSuccess() {
-        Espresso.onView(ViewMatchers.withId(R.id.loading))
-            .check(matches(isDisplayed()))
-    }
-
-    @Test
     fun validateShowProducts_isSuccess() {
         Espresso.onView(ViewMatchers.withId(R.id.list_products))
             .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun searchProducts_isSuccess() {
+        Espresso.onView(ViewMatchers.withId(R.id.search_products))
+            .check(matches(isDisplayed()))
+            .perform(ViewActions.typeText("Samsung"))
+
+        Espresso.onView(ViewMatchers.withId(R.id.list_products))
+            .check(matches(isDisplayed()))
+    }
+
 }
