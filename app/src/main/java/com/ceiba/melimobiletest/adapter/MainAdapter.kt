@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ceiba.domain.models.Product
 import com.ceiba.melimobiletest.databinding.ItemProductBinding
 import com.squareup.picasso.Picasso
-import java.util.*
-import kotlin.collections.ArrayList
 
 class MainAdapter(private val context: Context, private val listProducts: List<Product>):
     RecyclerView.Adapter<MainAdapter.ViewHolder>(), View.OnClickListener {

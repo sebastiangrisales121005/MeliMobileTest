@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiInstance {
-    const val URL = "https://api.mercadolibre.com/sites/MLA/"
+    private const val URL = "https://api.mercadolibre.com/sites/MLA/"
     fun createApi(): ApiService {
         val okHttpBuilder = OkHttpClient.Builder()
         okHttpBuilder.addInterceptor(HttpLoggingInterceptor())
