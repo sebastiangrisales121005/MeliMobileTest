@@ -17,6 +17,7 @@ import com.ceiba.melimobiletest.R
 import com.ceiba.melimobiletest.adapter.MainAdapter
 import com.ceiba.melimobiletest.databinding.ActivityMainBinding
 import com.ceiba.melimobiletest.detailproduct.view.DetailProductActivity
+import com.ceiba.melimobiletest.idling.EspressoIdlingResource
 import com.ceiba.melimobiletest.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         showLoading(true)
 
+        EspressoIdlingResource.increment()
         mMainViewModel?.showProducts("Motorola")
         searchProducts()
         onClickDetailProduct()
@@ -71,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             listArrayOfProducts.clear()
             listArrayOfProducts.addAll(it)
             mMainAdapter.notifyDataSetChanged()
+            EspressoIdlingResource.decrement()
         }
 
         mMainViewModel?.showMessage?.observe(this) {
