@@ -17,6 +17,10 @@ class Product constructor(
         validateProductEmpty()
     }
 
+    /**
+     * Método que permite validar la transparencia de los datos del producto
+     * para evitar valores vacíos
+     */
     private fun validateProductEmpty() {
         if (title.isEmpty() || imageProduct.isEmpty()) {
             throw ProductException(MESSAGE_EMPTY)

@@ -9,6 +9,11 @@ data class Address(var stateName: String,
     init {
         validateDataEmpty()
     }
+
+    /**
+     * Método que valida la transparencia de los datos de dirección para
+     * que estos no se obtengan vacíos
+     */
     private fun validateDataEmpty() {
         if (stateName.isEmpty() || cityName.isEmpty()) {
             throw ProductException(MESSAGE_EMPTY)

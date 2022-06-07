@@ -50,6 +50,10 @@ class DetailProductActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    /**
+     * Método que muestra el detalle del producto en los componentes correspondientes
+     *
+     */
     private fun showDataDetailProduct(product: Product) {
         val cityState = "${product.addressProduct.stateName} - ${product.addressProduct.cityName}"
         val price = "$${product.price}"

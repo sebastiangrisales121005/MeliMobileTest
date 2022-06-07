@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity() {
 
         showLoading(true)
 
+        //Uso de idling resource para notificar en que momento se finaliza la consulta al webservice
+        //para las pruebas funcionales
         EspressoIdlingResource.increment()
         mMainViewModel?.showProducts(PRODUCT_DEFAULT)
         searchProducts()
@@ -69,6 +71,8 @@ class MainActivity : AppCompatActivity() {
             listArrayOfProducts.clear()
             listArrayOfProducts.addAll(it)
             mMainAdapter.notifyDataSetChanged()
+            //Uso de idling resource para notificar en que momento se finaliza la consulta al webservice
+            //para las pruebas funcionales
             EspressoIdlingResource.decrement()
         }
 
@@ -81,6 +85,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Método que permite pulsar en un ítem de la lista de productos para
+     * observar el detalle
+     */
     private fun onClickDetailProduct() {
         mMainAdapter.setProductOnClickListener {
             val product = listArrayOfProducts[mActivityMainBinding.listProducts.getChildAdapterPosition(it)]
@@ -90,6 +98,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Método que permite la busqueda de productos desde el componente
+     * editable
+     */
     private fun searchProducts() {
         mActivityMainBinding.searchProducts.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -109,6 +121,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    /**
+     * Método que muestra componente de cargando dependiendo del estado
+     */
     private fun showLoading(isVisible: Boolean) {
         when(isVisible) {
             true -> mActivityMainBinding.loading.visibility = View.VISIBLE

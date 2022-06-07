@@ -19,6 +19,10 @@ class MainViewModel @Inject constructor(private val productUseCase: ProductUseCa
     val showMessage = MutableLiveData<String>()
     val showLoading = MutableLiveData<Boolean>()
 
+    /**
+     * Método que instancia la lista de productos y se la asigna
+     * a la lista mutable correspondiente para su visualización
+     */
     fun showProducts(filterSearch: String) {
         viewModelScope.launch {
             withContext(Dispatchers.Main) {
@@ -36,6 +40,10 @@ class MainViewModel @Inject constructor(private val productUseCase: ProductUseCa
         }
     }
 
+    /**
+     * Método que retorna la lista de productos obtenidos desde el webservice
+     * a través de una corrutina
+     */
     private suspend fun getProducts(filterSearch: String): List<Product> =
         withContext(Dispatchers.IO) { productUseCase.getProducts(filterSearch) }
 
