@@ -7,7 +7,7 @@
     <data>
         <variable
             name="model"
-            type="com.ceiba.melimobiletest.detailproduct.viewmodel.DetailProductViewModel" />
+            type="com.ceiba.melimobiletest.detailproduct.view.DetailProductActivity" />
     </data>
 
 
