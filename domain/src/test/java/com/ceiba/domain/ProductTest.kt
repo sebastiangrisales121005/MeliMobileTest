@@ -52,14 +52,29 @@ class ProductTest {
             .build()
         val productList = listOf(productBuilder)
         val productRepository = Mockito.mock(ProductRepository::class.java)
-        `when`(productRepository.getProducts()).thenReturn(productList)
+        `when`(productRepository.getProducts("Motorola")).thenReturn(productList)
         val productUseCase = ProductUseCase(productRepository)
 
         //Act
-        val productsFromUseCase = productUseCase.getProducts()
+        val productsFromUseCase = productUseCase.getProducts("Motorola")
 
         //Assert
         Assert.assertEquals(1, productsFromUseCase.size)
+
+    }
+
+    @Test
+    fun product_getProductsEmpty_isSuccess() = runBlocking {
+        //Arrange
+        val productRepository = Mockito.mock(ProductRepository::class.java)
+        `when`(productRepository.getProducts("Motorola")).thenReturn(listOf())
+        val productUseCase = ProductUseCase(productRepository)
+
+        //Act
+        val productsFromUseCase = productUseCase.getProducts("Motorola")
+
+        //Assert
+        Assert.assertEquals(0, productsFromUseCase.size)
 
     }
 }
