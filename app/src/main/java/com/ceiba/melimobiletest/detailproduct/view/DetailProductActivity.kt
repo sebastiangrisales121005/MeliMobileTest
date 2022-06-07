@@ -52,10 +52,11 @@ class DetailProductActivity : AppCompatActivity() {
 
     private fun showDataDetailProduct(product: Product) {
         val cityState = "${product.addressProduct.stateName} - ${product.addressProduct.cityName}"
+        val price = "$${product.price}"
 
         Picasso.get().load(product.imageProduct).into(mActivityDetailProductBinding.imageProduct)
         mActivityDetailProductBinding.titleProduct.text = product.title
-        mActivityDetailProductBinding.priceProduct.text = product.price.toString()
+        mActivityDetailProductBinding.priceProduct.text = price
         mActivityDetailProductBinding.cityProduct.text = cityState
     }
 }
