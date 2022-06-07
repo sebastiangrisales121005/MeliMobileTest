@@ -69,6 +69,10 @@ class MainActivity : AppCompatActivity() {
             listArrayOfProducts.addAll(it)
             mMainAdapter.notifyDataSetChanged()
         }
+
+        mMainViewModel?.showMessage?.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun onClickDetailProduct() {
