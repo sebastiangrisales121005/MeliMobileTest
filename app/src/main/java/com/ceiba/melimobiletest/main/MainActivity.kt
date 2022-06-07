@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val PRODUCT_KEY = "PRODUCT"
+        const val PRODUCT_DEFAULT = "Motorola"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         showLoading(true)
 
         EspressoIdlingResource.increment()
-        mMainViewModel?.showProducts("Motorola")
+        mMainViewModel?.showProducts(PRODUCT_DEFAULT)
         searchProducts()
         onClickDetailProduct()
     }
