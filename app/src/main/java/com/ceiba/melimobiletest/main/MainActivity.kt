@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,6 +58,8 @@ class MainActivity : AppCompatActivity() {
             adapter = mMainAdapter
         }
 
+        showLoading(true)
+
         mMainViewModel?.showProducts("Motorola")
         searchProducts()
         onClickDetailProduct()
@@ -72,6 +75,10 @@ class MainActivity : AppCompatActivity() {
 
         mMainViewModel?.showMessage?.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+
+        mMainViewModel?.showLoading?.observe(this) {
+            showLoading(it)
         }
     }
 
@@ -101,5 +108,12 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun showLoading(isVisible: Boolean) {
+        when(isVisible) {
+            true -> mActivityMainBinding.loading.visibility = View.VISIBLE
+            else -> {mActivityMainBinding.loading.visibility = View.GONE}
+        }
     }
 }

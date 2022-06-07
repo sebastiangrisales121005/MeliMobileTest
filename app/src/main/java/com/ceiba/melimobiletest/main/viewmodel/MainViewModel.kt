@@ -17,6 +17,7 @@ class MainViewModel @Inject constructor(private val productUseCase: ProductUseCa
 
     val showListProducts = MutableLiveData<List<Product>>()
     val showMessage = MutableLiveData<String>()
+    val showLoading = MutableLiveData<Boolean>()
 
     fun showProducts(filterSearch: String) {
         viewModelScope.launch {
@@ -25,6 +26,7 @@ class MainViewModel @Inject constructor(private val productUseCase: ProductUseCa
                     val products = getProducts(filterSearch)
                     if (products.isNotEmpty()) {
                         showListProducts.value = getProducts(filterSearch)
+                        showLoading.value = false
                     }
                 } catch (exception: ProductException) {
                     showMessage.value = exception.message
