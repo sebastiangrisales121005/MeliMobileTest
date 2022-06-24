@@ -2,6 +2,8 @@ package com.ceiba.melimobiletest.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
+import android.media.VolumeShaper
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ceiba.dataaccess.models.Result
 import com.ceiba.domain.models.Product
 import com.ceiba.melimobiletest.adapter.MainAdapter
 import com.ceiba.melimobiletest.databinding.ActivityMainBinding
@@ -47,6 +50,18 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        when(newConfig.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                mMainViewModel?.getDataInChangeOrientation()?.let { setupAdapter(it) }
+            }
+            Configuration.ORIENTATION_PORTRAIT -> {
+                mMainViewModel?.getDataInChangeOrientation()?.let { setupAdapter(it) }
+            }
+        }
+    }
+
     private fun initializeWidgets() {
         mMainAdapter = MainAdapter(this, listArrayOfProducts)
 
@@ -55,34 +70,51 @@ class MainActivity : AppCompatActivity() {
             adapter = mMainAdapter
         }
 
-        showLoading(true)
-
         //Uso de idling resource para notificar en que momento se finaliza la consulta al webservice
         //para las pruebas funcionales
         EspressoIdlingResource.increment()
-        mMainViewModel?.showProducts(PRODUCT_DEFAULT)
+
+        showProducts(PRODUCT_DEFAULT)
         searchProducts()
         onClickDetailProduct()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun observables() {
-        mMainViewModel?.showListProducts?.observe(this) {
-            listArrayOfProducts.clear()
-            listArrayOfProducts.addAll(it)
-            mMainAdapter.notifyDataSetChanged()
-            //Uso de idling resource para notificar en que momento se finaliza la consulta al webservice
-            //para las pruebas funcionales
-            EspressoIdlingResource.decrement()
-        }
-
         mMainViewModel?.showMessage?.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
+    }
 
-        mMainViewModel?.showLoading?.observe(this) {
-            showLoading(it)
+    @SuppressLint("NotifyDataSetChanged")
+    private fun showProducts(filterSearch: String) {
+        mMainViewModel?.getProducts(filterSearch)?.observe(this) { result ->
+            when(result) {
+                is Result.Loading -> {
+                    showLoading(true)
+                }
+                is Result.Success -> {
+                    showLoading(false)
+                    val products = result.dataProduct
+                    if (products.isNotEmpty()) {
+                        setupAdapter(products)
+                        //Uso de idling resource para notificar en que momento se finaliza la consulta al webservice
+                        //para las pruebas funcionales
+                        EspressoIdlingResource.decrement()
+                    }
+                }
+                is Result.Error -> {
+                    showLoading(false)
+                    mMainViewModel?.showMessage?.value = result.exception.message
+                }
+            }
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setupAdapter(products: List<Product>) {
+        listArrayOfProducts.clear()
+        listArrayOfProducts.addAll(products)
+        mMainAdapter.notifyDataSetChanged()
     }
 
     /**
@@ -110,7 +142,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 p0?.let {
                     if (it.isNotEmpty()) {
-                        mMainViewModel?.showProducts(it.toString())
+                        showProducts(it.toString())
                     }
                 }
             }

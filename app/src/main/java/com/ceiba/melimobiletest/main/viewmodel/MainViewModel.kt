@@ -1,8 +1,7 @@
 package com.ceiba.melimobiletest.main.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.ceiba.dataaccess.models.Result
 import com.ceiba.domain.exception.ProductException
 import com.ceiba.domain.models.Product
 import com.ceiba.domain.usecases.ProductUseCase
@@ -13,39 +12,44 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val productUseCase: ProductUseCase): ViewModel() {
+class MainViewModel @Inject constructor(private val savedStateHandle: SavedStateHandle?,
+                                        private val productUseCase: ProductUseCase): ViewModel() {
 
-    val showListProducts = MutableLiveData<List<Product>>()
-    val showMessage = MutableLiveData<String>()
-    val showLoading = MutableLiveData<Boolean>()
-
-    /**
-     * Método que instancia la lista de productos y se la asigna
-     * a la lista mutable correspondiente para su visualización
-     */
-    fun showProducts(filterSearch: String) {
-        viewModelScope.launch {
-            withContext(Dispatchers.Main) {
-                try {
-                    val products = getProducts(filterSearch)
-                    if (products.isNotEmpty()) {
-                        showListProducts.value = getProducts(filterSearch)
-                        showLoading.value = false
-                    }
-                } catch (exception: ProductException) {
-                    showMessage.value = exception.message
-                }
-
-            }
-        }
+    companion object {
+        const val PRODUCT_KEY = "PRODUCTS"
     }
+
+    val showMessage = MutableLiveData<String>()
 
     /**
      * Método que retorna la lista de productos obtenidos desde el webservice
      * a través de una corrutina
      */
-    private suspend fun getProducts(filterSearch: String): List<Product> =
-        withContext(Dispatchers.IO) { productUseCase.getProducts(filterSearch) }
+    fun getProducts(filterSearch: String) = liveData {
+        withContext(Dispatchers.IO) {
+            emit(Result.Loading)
+
+            kotlin.runCatching {
+                productUseCase
+            }.onSuccess {
+                try {
+                    val products = it.getProducts(filterSearch)
+                    emit(Result.Success(products))
+                    saveDataInChangeOrientation(products)
+                } catch (exception: ProductException) {
+                    showMessage.value = exception.message
+                }
+
+            }.onFailure {
+                emit(Result.Error(it))
+            }
+
+        }
+    }
+
+    private fun saveDataInChangeOrientation(listProducts: List<Product>) = savedStateHandle?.set(PRODUCT_KEY, listProducts)
+
+    fun getDataInChangeOrientation() = savedStateHandle?.get<List<Product>>(PRODUCT_KEY)
 
 
 }
